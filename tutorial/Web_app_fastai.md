@@ -36,14 +36,14 @@ Coloque que arquivo no google drive ou dropbox (porque é de graça). É necess�
 
 Faça um fork no github deste repositório base, que contém uma aplicação pré-pronta e customizável.
 
-Edite, no próprio Github, o arquivo [app/server.py](https://github.com/piegu/glasses-or-not/blob/master/app/server.py) para incluir:
+Edite, no próprio Github, o arquivo [app/server.py](app/server.py) para incluir:
 
-1. O endereço do `export.pkl` em `export_file_url`.
-2. Troque o nome das classes geradas pelo seu modelo em `classes = ['with_glasses', 'without_glasses']`.
+1. O endereço do `export.pkl` em `export_file_url` ou o ID do arquivo no Google Drive em `export_file_google_drive_id` caso o arquivo seja maior que 100MB (limite do scanner do antivitus).
+2. Troque o nome das classes geradas pelo seu modelo em `classes = ['Direito', 'Economia', 'Social']`.
 3. Lembre-se de usar a opção "Commit directly to the master branch".
-4. Edite também o texto que aparece para os usuários da sua aplicação, no arquivo [app/views/index.html](https://github.com/piegu/glasses-or-not/blob/master/app/view/index.html):
+4. Edite também o texto que aparece para os usuários da sua aplicação, no arquivo [app/static/index.html](app/static/index.html):
     1. O título (tag `<title>`)
-    2. O cabeçalho (`div class='title'`) e a explicação (tag `<p>`)
+    2. A descrição (`meta name="description"`)
 5. E pronto!
 
 ## 3) Deploy no Heroku
@@ -52,7 +52,9 @@ Apesar de ser gratuito, o deploy no Heroku exige passos adicionais, que devem se
 
 Normalmente o deploy no Heroku exige apenas o código da aplicação, mas, no caso dos modelos do fastai, ela é grande demais para o método tradicional e exige o **deploy em containers docker**. Para isso, é necessário executar os comandos numa máquina com docker instalado.
 
-No entanto, como estamos usando uma máquina do Google Cloud para gerar o modelo, podemos usar o Cloud Shell para fazer o deploy.
+Se estiver usando uma máquina do Google Cloud para gerar o modelo, pode-se usar o Cloud Shell para fazer o deploy. Se esse for o caso, execute os passos do item 3.1.
+
+Se estiver em uma máquina local Linux, pule para o passo 3.2.
 
 ### 3.1) Acesse o console do Google Cloud
 
@@ -67,21 +69,24 @@ Os passos a seguir consideram que você já tem uma conta no gcloud.
 
     ![](Captura_de_Tela_2019-04-10_as_13-306f313f-7622-4f88-bf4c-e0aebf9eda2a.36.17.png)
 
-4. Instale o cliente da heroku:
+
+### 3.2) Usando o cliente da heroku para deploy
+
+1. Instale o cliente da heroku:
 
     `curl https://cli-assets.heroku.com/install.sh | sh`
 
     ![](0d2b036e-4920-42c7-83a9-7dc99d8b8966.jpg)
 
-5. Faça o clone da aplicação modificada e entre no diretório. Note que o seu endereço vai ser diferente do meu.
+1. Faça o clone da aplicação modificada e entre no diretório. Note que o seu endereço vai ser diferente do meu.
 
-    `git clone https://github.com/piegu/glasses-or-not.git`
+    `git clone https://github.com/klause/classificador-consultoria.git`
 
     ![](60804939-9189-476e-a74f-9c2335411b7e.jpg)
     
 6. Entre na pasta do seu modelo. Note que o nome da sua pasta vai ser diferente do meu.
 
-    `cd glasses-or-not`
+    `cd classificador-consultoria`
 
     ![](7d12a72b-13cc-406c-a5b5-5378166e3730.jpg)
 
@@ -127,4 +132,4 @@ Os passos a seguir consideram que você já tem uma conta no gcloud.
 
     `heroku open`
     
-    Se isso não abrir a janela do navegador, seu aplicativo já estará disponível em https://<nome_da_aplicação>.herokuapp.com. No nosso exemplo em https://glasses-or-not.herokuapp.com/
+    Se isso não abrir a janela do navegador, seu aplicativo já estará disponível em https://<nome_da_aplicação>.herokuapp.com. No nosso exemplo em https://classificador-consultoria.herokuapp.com/

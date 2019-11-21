@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Classificador de texto de solicitações feitas para a consultoria legislativa do SF</title>
+
+	<meta name="description" content="Página para teste do serviço do classificador da consultoria">
+	<meta name="author" content="Senado Federal">
+
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+	<link href="static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="static/css/style.css" rel="stylesheet">
+
+	<script src="static/js/jquery.min.js"></script>
+	<script src="static/js/tether.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+
+		function getInferSuccess(rsp) {
+			$('#progressBar').hide();
+			
+			var html_result = "Índice classe: <strong>" + rsp.result.idx_classe + "</strong>";
+
+			for (i=0; i<rsp.result.lista_prob.length;i++) {
+				tmp = rsp.result.lista_prob[i].classe + " = " + rsp.result.lista_prob[i].probabilidade;
+				if (i == rsp.result.idx_classe) {
+					tmp = "<strong>" + tmp + "</strong>";
+				}
+				tmp = "</br>" + tmp;
+				html_result += tmp;
+			}
+			
+			$("#divResultado").html(html_result);
+			$('#divResultado').show();
+		}
+
+		function getInferError(rsp, status, errorThrown) {
+			$('#divAlertErro').html("Erro! Status " + status);
+			$('#divAlertErro').show();
+			$('#progressBar').hide();
+		}
+
+		function btnOkClick() {
+
+			$('#divAlertErro').hide();
+			$('#divResultado').hide();
+			$('#progressBar').show();
+			
+			param_texto = $('#textoReqConsultoria').val();
+
+			$.ajax('/predict', {
+				type: "POST",
+				data: param_texto,
+				success: getInferSuccess,
+				error: getInferError
+			});
+
+			return false;
+		}
+	</script>
+
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row mb-4">
+
+		</div>
+		<div class="row with-margin mb-4">
+
+			<div class="col-lg-8">
+				<form id="formPredict" action="/none" onsubmit="return false;">
+					<div class="input-group">
+						<label for="textoReqConsultoria" class="mx-sm-2 pt-2">
+							Texto solicitação consultoria:
+						</label>
+						<textarea class="form-control" id="textoReqConsultoria" rows="4"></textarea>
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary" id="btnOk" onclick="btnOkClick()">Ok</button>
+						</span>
+					</div>
+				</form>
+
+			</div>
+
+		</div>
+		<div class="alert alert-danger" role="alert" id="divAlertErro" style="display: none">
+			Erro
+		</div>
+		<div class="alert alert-success" role="alert" id="divResultado" style="display: none">
+
+		<div class="progress">
+			<div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; display: none"></div>
+		</div>
+		
+		</div>
+	</div>
+
+</body>
+
+</html>
