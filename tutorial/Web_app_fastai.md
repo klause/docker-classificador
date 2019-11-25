@@ -36,12 +36,12 @@ Coloque que arquivo no google drive ou dropbox (porque é de graça). É necess�
 
 Faça um fork no github deste repositório base, que contém uma aplicação pré-pronta e customizável.
 
-Edite, no próprio Github, o arquivo [app/server.py](app/server.py) para incluir:
+Edite, no próprio Github, o arquivo [app/server.py](../app/server.py) para incluir:
 
 1. O endereço do `export.pkl` em `export_file_url` ou o ID do arquivo no Google Drive em `export_file_google_drive_id` caso o arquivo seja maior que 100MB (limite do scanner do antivitus).
 2. Troque o nome das classes geradas pelo seu modelo em `classes = ['Direito', 'Economia', 'Social']`.
 3. Lembre-se de usar a opção "Commit directly to the master branch".
-4. Edite também o texto que aparece para os usuários da sua aplicação, no arquivo [app/static/index.html](app/static/index.html):
+4. Edite também o texto que aparece para os usuários da sua aplicação, no arquivo [app/static/index.html](../app/static/index.html):
     1. O título (tag `<title>`)
     2. A descrição (`meta name="description"`)
 5. E pronto!
