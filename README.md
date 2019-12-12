@@ -5,6 +5,7 @@ Este é um [tutorial](tutorial/Web_app_fastai.md) rápido para fazer o deploy no
 ### Agradecimento
 
 [Texto de introdução](README.md) e [tutorial](tutorial/Web_app_fastai.md)...
+- Adaptado do Tutorial do Pierre Guillou [https://github.com/piegu]
 - (muito, muito, muito) inspirado do [trabalho](https://github.com/weltonrodrigo/fastai-v3) do [Welton Rodrigo Torres Nascimento](https://github.com/weltonrodrigo) (até cópias/colas de seus textos porque não fazia sentido modificá-los)
 - (muito, muito) inspirado do [trabalho](https://github.com/render-examples/fastai-v3) do [Anurag Goel](https://github.com/anurag)
 - (muito) inspirado do [trabalho](https://github.com/nikhilno1/healthy-or-not/blob/master/heroku-deploy.md) do [Nikhil](https://github.com/nikhilno1)
