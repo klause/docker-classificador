@@ -70,6 +70,11 @@
 <body>
 
 	<div class="container-fluid">
+		<div class="center">
+			<p><strong>Análise de Sentimento: caso Lojas Americanas</strong></p>
+			<p><strong>Inteligência Artificial (modelo deep learning)</strong></p>
+			<p><i>Autor: Grupo de Pesquisa SF</a></i></p>
+		</div>
 		<div class="row mb-4">
 
 		</div>
@@ -78,10 +83,8 @@
 			<div class="col-lg-8">
 				<form id="formPredict" action="/none" onsubmit="return false;">
 					<div class="input-group">
-						<label for="textoReqConsultoria" class="mx-sm-2 pt-2">
-							Texto solicitação consultoria:
-						</label>
-						<textarea class="form-control" id="textoReqConsultoria" rows="4"></textarea>
+
+						<textarea placeholder="Digite o texto aqui..." class="form-control" id="textoReqConsultoria" rows="4"></textarea>
 						<span class="input-group-btn">
 							<button type="submit" class="btn btn-primary" id="btnOk" onclick="btnOkClick()">Ok</button>
 						</span>
